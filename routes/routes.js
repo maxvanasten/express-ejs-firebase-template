@@ -8,7 +8,7 @@ import express from "express";
 const routes = express.Router();
 
 routes.get("/", async (req, res) => {
-  const logged_in = await isLoggedIn(admin, req.cookies.session);
+  const logged_in = await isLoggedIn(req.cookies.session);
 
   res.render("pages/index", {
     logged_in: logged_in,
@@ -16,7 +16,7 @@ routes.get("/", async (req, res) => {
 });
 
 routes.get("/hidden", async (req, res) => {
-  const logged_in = await isLoggedIn(admin, req.cookies.session);
+  const logged_in = await isLoggedIn(req.cookies.session);
   if (!logged_in.status) {
     res.render("pages/accessdenied", { logged_in: logged_in });
   } else {
@@ -27,7 +27,7 @@ routes.get("/hidden", async (req, res) => {
 });
 
 routes.get("/:page", async (req, res) => {
-  const logged_in = await isLoggedIn(admin, req.cookies.session);
+  const logged_in = await isLoggedIn(req.cookies.session);
 
   if (fs.existsSync(`./views/pages/${req.params.page}.ejs`)) {
     res.render(`pages/${req.params.page}`, {
@@ -39,7 +39,7 @@ routes.get("/:page", async (req, res) => {
 });
 
 routes.get("/hidden/:page", async (req, res) => {
-  const logged_in = await isLoggedIn(admin, req.cookies.session);
+  const logged_in = await isLoggedIn(req.cookies.session);
   if (!logged_in.status) {
     res.render("pages/accessdenied", { logged_in: logged_in });
   } else {

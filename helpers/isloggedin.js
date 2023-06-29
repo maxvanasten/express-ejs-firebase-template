@@ -1,8 +1,9 @@
 /** @format */
 
 import { debugLog } from "./debuglog.js";
+import { admin } from "./database.js";
 
-const isLoggedIn = async (admin, sessionCookie) => {
+const isLoggedIn = async (sessionCookie) => {
   debugLog(`isLoggedIn(): sessionCookie = ${sessionCookie}`);
 
   let response = {
